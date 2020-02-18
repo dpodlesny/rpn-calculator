@@ -1,14 +1,23 @@
 <?php
 /**
- * @author  Denys Podliesnyi <underwood.dv@gmail.com>
+ * @author Denys Podliesnyi <underwood.dv@gmail.com>
  *
  * @license MIT
  *
- * @link    https://github.com/dpodlesny/rpn-calculator
+ * @link https://github.com/dpodlesny/rpn-calculator
  */
 
 namespace RpnCalculator;
 
+use RpnCalculator\Business\Calculator\RpnCalculator;
+use RpnCalculator\Business\Calculator\RpnCalculatorInterface;
+use RpnCalculator\Business\Mapper\RpnCalculatorExpressionMapper;
+use RpnCalculator\Business\Mapper\RpnCalculatorExpressionMapperInterface;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionDataTransferValidator;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionDataTransferValidatorInterface;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionValueValidator;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionValueValidatorInterface;
+use RpnCalculator\Command\RpnCalculatorCommand;
 use RpnCalculator\Command\RpnCalculatorCommandInterface;
 
 class RpnCalculatorFactory
@@ -18,7 +27,7 @@ class RpnCalculatorFactory
      */
     public function createRpnCalculatorCommand(): RpnCalculatorCommandInterface
     {
-        //@todo return
+        return new RpnCalculatorCommand($this->createRpnCalculatorFacade());
     }
 
     /**
@@ -26,6 +35,41 @@ class RpnCalculatorFactory
      */
     public function createRpnCalculatorFacade(): RpnCalculatorFacadeInterface
     {
-        //@todo return
+        return new RpnCalculatorFacade($this->createRpnCalculator());
+    }
+
+    /**
+     * @return RpnCalculatorInterface
+     */
+    public function createRpnCalculator(): RpnCalculatorInterface
+    {
+        return new RpnCalculator($this->createRpnCalculatorExpressionMapper());
+    }
+
+    /**
+     * @return RpnCalculatorExpressionMapperInterface
+     */
+    public function createRpnCalculatorExpressionMapper(): RpnCalculatorExpressionMapperInterface
+    {
+        return new RpnCalculatorExpressionMapper(
+            $this->createRpnCalculatorExpressionValueValidator(),
+            $this->createRpnCalculatorExpressionDataTransferValidator()
+        );
+    }
+
+    /**
+     * @return RpnCalculatorExpressionValueValidatorInterface
+     */
+    public function createRpnCalculatorExpressionValueValidator(): RpnCalculatorExpressionValueValidatorInterface
+    {
+        return new RpnCalculatorExpressionValueValidator();
+    }
+
+    /**
+     * @return RpnCalculatorExpressionDataTransferValidatorInterface
+     */
+    public function createRpnCalculatorExpressionDataTransferValidator(): RpnCalculatorExpressionDataTransferValidatorInterface
+    {
+        return new RpnCalculatorExpressionDataTransferValidator();
     }
 }
