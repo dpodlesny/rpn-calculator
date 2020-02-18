@@ -38,7 +38,24 @@ class RpnCalculatorCommand implements RpnCalculatorCommandInterface
         echo PHP_EOL;
         echo ' ***************************** ';
         echo PHP_EOL;
-
+        echo ' Supported expression types:';
+        echo PHP_EOL;
+        echo ' > 3 4 + ';
+        echo PHP_EOL;
+        echo ' 7 ';
+        echo PHP_EOL;
+        echo ' _____________________________ ';
+        echo PHP_EOL;
+        echo ' > 6';
+        echo PHP_EOL;
+        echo ' > 5';
+        echo PHP_EOL;
+        echo ' > -';
+        echo PHP_EOL;
+        echo ' 1 ';
+        echo PHP_EOL;
+        echo ' ***************************** ';
+        echo PHP_EOL;
         $this->calculate();
     }
 
