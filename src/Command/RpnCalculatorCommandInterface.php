@@ -1,10 +1,10 @@
 <?php
 /**
- * @author  Denys Podliesnyi <underwood.dv@gmail.com>
+ * @author Denys Podliesnyi <underwood.dv@gmail.com>
  *
  * @license MIT
  *
- * @link    https://github.com/dpodlesny/rpn-calculator
+ * @link https://github.com/dpodlesny/rpn-calculator
  */
 
 namespace RpnCalculator\Command;
