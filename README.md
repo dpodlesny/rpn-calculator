@@ -1,6 +1,6 @@
 # Command-line reverse polish notation (RPN) calculator
 
-Current version also supports:
+Current version supports:
  * php-cli
 
 ## Installation
@@ -14,6 +14,7 @@ composer require dpodlesny/rpn-calculator
 
 ## How to use
 Just type command in terminal ```php bin/calculate```
+
 Then follow the instruction
 
 or
@@ -23,3 +24,5 @@ Use in your project:
 ```$rpnCalculatorFacade = (new RpnCalculatorFactory)->createRpnCalculatorFacade()```
 
 And feel free to call any of Facade's public functions that you need.
+
+You can easily extend any business logic by overwriting the class and the factory method.
