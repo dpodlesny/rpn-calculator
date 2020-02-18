@@ -1,0 +1,15 @@
+#!/usr/bin/php
+
+<?php
+/**
+ * @author  Denys Podliesnyi <underwood.dv@gmail.com>
+ *
+ * @license MIT
+ *
+ * @link    https://github.com/dpodlesny/rpn-calculator
+ */
+require_once __DIR__.'/../src/RpnCalculatorFactory.php';
+
+use RpnCalculator\RpnCalculatorFactory;
+
+(new RpnCalculatorFactory())->createRpnCalculatorCommand()->execute();
