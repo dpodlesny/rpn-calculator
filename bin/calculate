@@ -8,7 +8,8 @@
  *
  * @link    https://github.com/dpodlesny/rpn-calculator
  */
-require_once __DIR__.'/../src/RpnCalculatorFactory.php';
+
+require __DIR__.'/../vendor/autoload.php';
 
 use RpnCalculator\RpnCalculatorFactory;
 
