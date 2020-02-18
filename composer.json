@@ -2,7 +2,7 @@
     "name": "dpodlesny/rpn-calculator",
     "description": "Command-line reverse polish notation (RPN) calculator.",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Denys Podliesnyi",
