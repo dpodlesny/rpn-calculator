@@ -69,7 +69,7 @@ class RpnCalculatorExpressionMapper implements RpnCalculatorExpressionMapperInte
                 continue;
             }
 
-            $rpnCalculatorExpressionDataTransfer->addValue((float)number_format((float)$value, 1));
+            $rpnCalculatorExpressionDataTransfer->addValue((float)number_format((float)$value, 1, '.', ''));
         }
 
         if ($this->rpnCalculatorExpressionDataTransferValidator->isValid($rpnCalculatorExpressionDataTransfer) === false) {
