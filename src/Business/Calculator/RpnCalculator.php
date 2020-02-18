@@ -68,6 +68,8 @@ class RpnCalculator implements RpnCalculatorInterface
             $result = $this->processValuesByOperation($dataTransfer->getValues(), $dataTransfer->getOperation());
         }
 
+        $result = (float)number_format((float)$result, 1);
+
         $this->stack = [$result];
 
         return $result;
