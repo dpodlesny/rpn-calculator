@@ -15,13 +15,13 @@ class RpnCalculatorConfig
     public const OPERATION_MINUS = '-';
     public const OPERATION_MULTIPLY = '*';
     public const OPERATION_DIVISION = '/';
-    public const OPERATION_QUIT = 'q';
+
+    public const COMMAND_QUIT = 'q';
 
     public const ALLOWED_OPERATIONS = [
         self::OPERATION_PLUS,
         self::OPERATION_MINUS,
         self::OPERATION_MULTIPLY,
         self::OPERATION_DIVISION,
-        self::OPERATION_QUIT,
     ];
 }

@@ -9,6 +9,7 @@
 
 namespace RpnCalculator\Command;
 
+use RpnCalculator\RpnCalculatorConfig;
 use RpnCalculator\RpnCalculatorFacadeInterface;
 use Throwable;
 
@@ -92,6 +93,6 @@ class RpnCalculatorCommand implements RpnCalculatorCommandInterface
             }
 
             echo PHP_EOL;
-        } while ($x !== 'q');
+        } while ($x !== RpnCalculatorConfig::COMMAND_QUIT);
     }
 }
