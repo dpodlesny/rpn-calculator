@@ -1,5 +1,4 @@
 #!/usr/bin/php
-
 <?php
 /**
  * @author  Denys Podliesnyi <underwood.dv@gmail.com>
@@ -9,7 +8,11 @@
  * @link    https://github.com/dpodlesny/rpn-calculator
  */
 
-require __DIR__.'/../vendor/autoload.php';
+foreach ([__DIR__ . '/../autoload.php',__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php'] as $file) {
+    if (file_exists($file)) {
+        require $file;
+    }
+}
 
 use RpnCalculator\RpnCalculatorFactory;
 
