@@ -86,6 +86,10 @@ class RpnCalculatorCommand implements RpnCalculatorCommandInterface
             $x = strtolower(trim($x));
             fclose($handle);
 
+            if($x === RpnCalculatorConfig::COMMAND_QUIT) {
+                break;
+            }
+
             try {
                 echo $this->rpnCalculatorFacade->calculate($x);
             } catch (Throwable $exception) {
