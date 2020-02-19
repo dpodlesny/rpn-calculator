@@ -56,6 +56,7 @@ class RpnCalculatorCommand implements RpnCalculatorCommandInterface
         echo PHP_EOL;
         echo ' ***************************** ';
         echo PHP_EOL;
+
         $this->calculate();
     }
 
