@@ -13,7 +13,7 @@ composer require dpodlesny/rpn-calculator
 - PHP 7.2
 
 ## How to use
-Just type command in terminal ```php bin/calculate```
+Run command in terminal ```php bin/rpn-calculator``` from the module folder.
 
 Then follow the instruction
 
