@@ -13,5 +13,5 @@ use Exception;
 
 class WrongExpressionFormatException extends Exception
 {
-    public const MESSAGE = 'Wrong expression format. Format must be space separated numbers\operation e.x. "3 3 +" or single line number or operation';
+    public const MESSAGE = 'Wrong expression format. Supported format: "3 3 +" or single line number or operation. Supported operation are: %s';
 }

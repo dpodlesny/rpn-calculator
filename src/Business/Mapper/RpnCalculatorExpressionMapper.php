@@ -11,6 +11,7 @@ namespace RpnCalculator\Business\Mapper;
 
 use RpnCalculator\Business\DataTransfer\RpnCalculatorExpressionDataTransfer;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionDataTransferValidatorInterface;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionOperationValidatorInterface;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionValueValidatorInterface;
 use RpnCalculator\Exception\WrongExpressionFormatException;
 use RpnCalculator\RpnCalculatorConfig;
@@ -30,15 +31,24 @@ class RpnCalculatorExpressionMapper implements RpnCalculatorExpressionMapperInte
     protected $rpnCalculatorExpressionDataTransferValidator;
 
     /**
-     * @param RpnCalculatorExpressionValueValidatorInterface        $rpnCalculatorExpressionValueValidator
-     * @param RpnCalculatorExpressionDataTransferValidatorInterface $RpnCalculatorExpressionDataTransferValidator
+     * @var RpnCalculatorExpressionOperationValidatorInterface
+     */
+    protected $rpnCalculatorExpressionOperationValidator;
+
+    /**
+     * @param RpnCalculatorExpressionValueValidatorInterface $rpnCalculatorExpressionValueValidator
+     * @param RpnCalculatorExpressionDataTransferValidatorInterface $rpnCalculatorExpressionDataTransferValidator
+     * @param RpnCalculatorExpressionOperationValidatorInterface $rpnCalculatorExpressionOperationValidator
      */
     public function __construct(
         RpnCalculatorExpressionValueValidatorInterface $rpnCalculatorExpressionValueValidator,
-        RpnCalculatorExpressionDataTransferValidatorInterface $RpnCalculatorExpressionDataTransferValidator
-    ) {
+        RpnCalculatorExpressionDataTransferValidatorInterface $rpnCalculatorExpressionDataTransferValidator,
+        RpnCalculatorExpressionOperationValidatorInterface $rpnCalculatorExpressionOperationValidator
+    )
+    {
         $this->rpnCalculatorExpressionValueValidator = $rpnCalculatorExpressionValueValidator;
-        $this->rpnCalculatorExpressionDataTransferValidator = $RpnCalculatorExpressionDataTransferValidator;
+        $this->rpnCalculatorExpressionDataTransferValidator = $rpnCalculatorExpressionDataTransferValidator;
+        $this->rpnCalculatorExpressionOperationValidator = $rpnCalculatorExpressionOperationValidator;
     }
 
     /**
@@ -59,24 +69,30 @@ class RpnCalculatorExpressionMapper implements RpnCalculatorExpressionMapperInte
         }
 
         foreach ($expressionDataArray as $value) {
-            if ($this->rpnCalculatorExpressionValueValidator->isValid($value) === false) {
-                continue;
-            }
-
-            if (in_array($value, RpnCalculatorConfig::ALLOWED_OPERATIONS)) {
+            if ($this->rpnCalculatorExpressionOperationValidator->isValid($value)) {
                 $rpnCalculatorExpressionDataTransfer->setOperation($value);
 
                 continue;
             }
 
-            $rpnCalculatorExpressionDataTransfer->addValue((float)number_format((float)$value, 1, '.', ''));
+            if ($this->rpnCalculatorExpressionValueValidator->isValid($value)) {
+                $rpnCalculatorExpressionDataTransfer->addValue((float)number_format((float)$value, 1, '.', ''));
+
+                continue;
+            }
+
+            throw new WrongExpressionFormatException(
+                sprintf(WrongExpressionFormatException::MESSAGE, implode(',', RpnCalculatorConfig::ALLOWED_OPERATIONS))
+            );
         }
 
-        if ($this->rpnCalculatorExpressionDataTransferValidator->isValid($rpnCalculatorExpressionDataTransfer) === false) {
-            throw new WrongExpressionFormatException(WrongExpressionFormatException::MESSAGE);
+        if ($this->rpnCalculatorExpressionDataTransferValidator->isValid($rpnCalculatorExpressionDataTransfer)) {
+            return $rpnCalculatorExpressionDataTransfer;
         }
 
-        return $rpnCalculatorExpressionDataTransfer;
+        throw new WrongExpressionFormatException(
+            sprintf(WrongExpressionFormatException::MESSAGE, implode(',', RpnCalculatorConfig::ALLOWED_OPERATIONS))
+        );
     }
 
     /**

@@ -15,6 +15,8 @@ use RpnCalculator\Business\Mapper\RpnCalculatorExpressionMapper;
 use RpnCalculator\Business\Mapper\RpnCalculatorExpressionMapperInterface;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionDataTransferValidator;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionDataTransferValidatorInterface;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionOperationValidator;
+use RpnCalculator\Business\Validator\RpnCalculatorExpressionOperationValidatorInterface;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionValueValidator;
 use RpnCalculator\Business\Validator\RpnCalculatorExpressionValueValidatorInterface;
 use RpnCalculator\Command\RpnCalculatorCommand;
@@ -53,7 +55,8 @@ class RpnCalculatorFactory
     {
         return new RpnCalculatorExpressionMapper(
             $this->createRpnCalculatorExpressionValueValidator(),
-            $this->createRpnCalculatorExpressionDataTransferValidator()
+            $this->createRpnCalculatorExpressionDataTransferValidator(),
+            $this->createRpnCalculatorExpressionOperationValidator()
         );
     }
 
@@ -63,6 +66,14 @@ class RpnCalculatorFactory
     public function createRpnCalculatorExpressionValueValidator(): RpnCalculatorExpressionValueValidatorInterface
     {
         return new RpnCalculatorExpressionValueValidator();
+    }
+
+    /**
+     * @return RpnCalculatorExpressionOperationValidatorInterface
+     */
+    public function createRpnCalculatorExpressionOperationValidator(): RpnCalculatorExpressionOperationValidatorInterface
+    {
+        return new RpnCalculatorExpressionOperationValidator();
     }
 
     /**

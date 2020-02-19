@@ -9,7 +9,9 @@
 
 namespace RpnCalculator\Business\Validator;
 
-class RpnCalculatorExpressionValueValidator implements RpnCalculatorExpressionValueValidatorInterface
+use RpnCalculator\RpnCalculatorConfig;
+
+class RpnCalculatorExpressionOperationValidator implements RpnCalculatorExpressionOperationValidatorInterface
 {
     /**
      * @param string $value
@@ -18,6 +20,6 @@ class RpnCalculatorExpressionValueValidator implements RpnCalculatorExpressionVa
      */
     public function isValid(string $value): bool
     {
-        return is_numeric($value);
+        return in_array($value, RpnCalculatorConfig::ALLOWED_OPERATIONS);
     }
 }
